@@ -22,10 +22,22 @@ def capture_ip(request):
     else:
       ip = request.META.get('REMOTE_ADDR').split(',')[0]
       
-  log_ip(ip)
+  log_ip(ip)  #log the ip
+  return ip   #and return it
   
 """
 Logs an IP to update the hits counter.
 """  
 def log_ip(ip):
-  
+  access, created = Access.objects.get_or_create(ip_address = ip)
+  if not created:               #update an existing entry
+    access.hits = F('hits') + 1 #no race condition to increase hits
+    access.save()
+  #else move along
+
+"""
+
+"""  
+def is_post_eligible(ip):
+
+    

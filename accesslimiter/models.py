@@ -10,7 +10,7 @@ class Access(Model):
   
   ip_address  = GenericIPAddressField()
   valid_after = DateTimeField(auto_now_add = True)
-  hits        = IntegerField(default = 0)
+  hits        = IntegerField(default = 1)
   completes   = IntegerField(default = 0)
   posts       = IntegerField(default = 0)
   
