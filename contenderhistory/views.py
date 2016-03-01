@@ -33,7 +33,7 @@ def get_history(id, start, end):
     avg = r.aggregate(Avg('elo'))
     return avg, True
   else: #we need to head backwards and get the first available ELO
-    r = q.filter(date_committed__lt=start)
+    r = q.filter(date_committed__gt=start, date_committed__lt=end)
     r.order_by(-'date_committed')
     count = r.count()
     if count > 0:
